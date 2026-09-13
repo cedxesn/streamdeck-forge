@@ -1,0 +1,85 @@
+StreamDeckForge
+===============
+
+Genere un profil Elgato Stream Deck a partir des raccourcis clavier des
+applications installees sur le PC.
+
+
+AVANT LE PREMIER LANCEMENT
+--------------------------
+
+Cette version legere a besoin du "Runtime .NET 8 Desktop" de Microsoft, a
+installer une seule fois :
+
+  https://dotnet.microsoft.com/fr-fr/download/dotnet/8.0
+
+Dans la colonne "Applications de bureau .NET" (.NET Desktop Runtime), prendre
+l'installateur x64 pour Windows.
+
+Sans lui, un message proposera de telecharger .NET au lancement.
+
+(La version "autonome" de 68 Mo, disponible sur la page des telechargements,
+n'a besoin de rien : c'est un seul fichier a double-cliquer.)
+
+
+PREMIER LANCEMENT
+-----------------
+
+Windows affichera un avertissement bleu SmartScreen, parce que le programme
+n'est pas signe. Cliquer sur "Informations complementaires", puis sur
+"Executer quand meme".
+
+
+UTILISATION
+-----------
+
+1. La liste des logiciels installes apparait a gauche, deja remplie.
+   Cliquer sur celui dont on veut les raccourcis.
+
+2. Cliquer sur "Extraire les raccourcis". Trois methodes sont lancees :
+   - la lecture du programme lui-meme ;
+   - la lecture des menus de sa fenetre, si le logiciel est ouvert ;
+   - la lecture de ses fichiers de configuration.
+
+   Astuce : ouvrir le logiciel cible AVANT d'extraire donne de meilleurs
+   resultats, la deuxieme methode a alors quelque chose a lire.
+
+3. Les raccourcis trouves s'affichent au centre. Le titre de chaque touche est
+   modifiable directement dans la liste ; decocher ceux dont on ne veut pas.
+
+4. A droite, choisir le modele de boitier (Mini, 15 touches, MK.2 ou XL), puis
+   cliquer sur "Remplissage auto".
+   Pour placer une touche precise : selectionner un raccourci dans la liste du
+   milieu, puis cliquer sur la case voulue. Cliquer une case sans selection la
+   vide.
+
+5. "Exporter le profil" ecrit un fichier .streamDeckProfile.
+   Double-cliquer ce fichier l'importe dans le logiciel Elgato Stream Deck.
+
+
+CAS PARTICULIER : MIXBUS ET ARDOUR
+----------------------------------
+
+Ces logiciels ecrivent la totalite de leurs raccourcis dans des fichiers sur le
+disque, valeurs par defaut comprises. L'extraction donne donc la liste complete,
+sans meme avoir besoin d'ouvrir Mixbus.
+
+Si un raccourci manque a l'appel, envoyez le fichier ".keys" de l'installation :
+il se trouve dans le dossier d'installation de Mixbus, ou dans
+  %LOCALAPPDATA%\Mixbus12
+
+
+SI RIEN N'EST TROUVE
+--------------------
+
+Certains logiciels ne publient leurs raccourcis nulle part : les applications
+recentes construites avec Electron ou Qt, notamment. Dans ce cas, ouvrir le
+logiciel, cocher "Deplier les menus" et relancer l'extraction.
+
+Les touches nommees "Commande 768" sont des raccourcis reels dont le nom n'a
+pas pu etre retrouve : il suffit de les renommer dans la liste du milieu avant
+d'exporter.
+
+
+sdforge.exe est la meme chose en ligne de commande, pour automatiser.
+Lancer "sdforge.exe" sans argument affiche l'aide.

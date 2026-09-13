@@ -65,6 +65,15 @@ Write-Host 'Publication de la ligne de commande...'
 & dotnet publish $cliPath @common
 if ($LASTEXITCODE -ne 0) { throw 'Echec de la publication de la ligne de commande.' }
 
+# Documentation destinee a l'utilisateur final, et un profil d'exemple pour verifier
+# tout de suite l'import dans le logiciel Elgato.
+Copy-Item (Join-Path $PSScriptRoot 'dist\LISEZ-MOI.txt') $output -Force
+
+$sample = Join-Path $PSScriptRoot 'exemples\Editeur du Registre.streamDeckProfile'
+if (Test-Path $sample) {
+    Copy-Item $sample $output -Force
+}
+
 Write-Host ''
 Write-Host "Termine. Contenu de $output :"
 Get-ChildItem $output -File | Sort-Object Length -Descending |
