@@ -1,0 +1,106 @@
+{
+  "product": "Microsoft Word (francais)",
+  "executables": [
+    "WINWORD.EXE"
+  ],
+  "culture": "fr",
+  "note": "Office francise ses raccourcis de mise en forme : Gras est Ctrl+G et non Ctrl+B.",
+  "shortcuts": [
+    {
+      "name": "Nouveau document",
+      "keys": "Ctrl+N"
+    },
+    {
+      "name": "Ouvrir",
+      "keys": "Ctrl+O"
+    },
+    {
+      "name": "Enregistrer",
+      "keys": "Ctrl+S"
+    },
+    {
+      "name": "Enregistrer sous",
+      "keys": "F12"
+    },
+    {
+      "name": "Imprimer",
+      "keys": "Ctrl+P"
+    },
+    {
+      "name": "Fermer",
+      "keys": "Ctrl+W"
+    },
+    {
+      "name": "Couper",
+      "keys": "Ctrl+X"
+    },
+    {
+      "name": "Copier",
+      "keys": "Ctrl+C"
+    },
+    {
+      "name": "Coller",
+      "keys": "Ctrl+V"
+    },
+    {
+      "name": "Annuler",
+      "keys": "Ctrl+Z"
+    },
+    {
+      "name": "Repeter",
+      "keys": "Ctrl+Y"
+    },
+    {
+      "name": "Rechercher",
+      "keys": "Ctrl+F"
+    },
+    {
+      "name": "Remplacer",
+      "keys": "Ctrl+H"
+    },
+    {
+      "name": "Selectionner tout",
+      "keys": "Ctrl+A"
+    },
+    {
+      "name": "Gras",
+      "keys": "Ctrl+G"
+    },
+    {
+      "name": "Italique",
+      "keys": "Ctrl+I"
+    },
+    {
+      "name": "Souligne",
+      "keys": "Ctrl+U"
+    },
+    {
+      "name": "Centrer",
+      "keys": "Ctrl+E"
+    },
+    {
+      "name": "Justifier",
+      "keys": "Ctrl+J"
+    },
+    {
+      "name": "Lien hypertexte",
+      "keys": "Ctrl+K"
+    },
+    {
+      "name": "Orthographe",
+      "keys": "F7"
+    },
+    {
+      "name": "Saut de page",
+      "keys": "Ctrl+Enter"
+    },
+    {
+      "name": "Repeter la derniere action",
+      "keys": "F4"
+    },
+    {
+      "name": "Aide",
+      "keys": "F1"
+    }
+  ]
+}

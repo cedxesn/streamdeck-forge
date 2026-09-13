@@ -1,0 +1,85 @@
+{
+  "product": "Microsoft PowerPoint (francais)",
+  "executables": [
+    "POWERPNT.EXE"
+  ],
+  "culture": "fr",
+  "shortcuts": [
+    {
+      "name": "Nouvelle presentation",
+      "keys": "Ctrl+N"
+    },
+    {
+      "name": "Ouvrir",
+      "keys": "Ctrl+O"
+    },
+    {
+      "name": "Enregistrer",
+      "keys": "Ctrl+S"
+    },
+    {
+      "name": "Enregistrer sous",
+      "keys": "F12"
+    },
+    {
+      "name": "Imprimer",
+      "keys": "Ctrl+P"
+    },
+    {
+      "name": "Nouvelle diapositive",
+      "keys": "Ctrl+M"
+    },
+    {
+      "name": "Diaporama depuis le debut",
+      "keys": "F5"
+    },
+    {
+      "name": "Diaporama depuis la diapositive",
+      "keys": "Shift+F5"
+    },
+    {
+      "name": "Dupliquer",
+      "keys": "Ctrl+D"
+    },
+    {
+      "name": "Couper",
+      "keys": "Ctrl+X"
+    },
+    {
+      "name": "Copier",
+      "keys": "Ctrl+C"
+    },
+    {
+      "name": "Coller",
+      "keys": "Ctrl+V"
+    },
+    {
+      "name": "Annuler",
+      "keys": "Ctrl+Z"
+    },
+    {
+      "name": "Gras",
+      "keys": "Ctrl+G"
+    },
+    {
+      "name": "Italique",
+      "keys": "Ctrl+I"
+    },
+    {
+      "name": "Souligne",
+      "keys": "Ctrl+U"
+    },
+    {
+      "name": "Grouper",
+      "keys": "Ctrl+Shift+G"
+    },
+    {
+      "name": "Lien hypertexte",
+      "keys": "Ctrl+K"
+    },
+    {
+      "name": "Orthographe",
+      "keys": "F7"
+    }
+  ]
+}

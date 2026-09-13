@@ -1,0 +1,56 @@
+{
+  "product": "VLC media player",
+  "executables": [
+    "vlc.exe"
+  ],
+  "shortcuts": [
+    {
+      "name": "Lecture / Pause",
+      "keys": "Space"
+    },
+    {
+      "name": "Plein ecran",
+      "keys": "F"
+    },
+    {
+      "name": "Muet",
+      "keys": "M"
+    },
+    {
+      "name": "Stop",
+      "keys": "S"
+    },
+    {
+      "name": "Suivant",
+      "keys": "N"
+    },
+    {
+      "name": "Precedent",
+      "keys": "P"
+    },
+    {
+      "name": "Ouvrir un fichier",
+      "keys": "Ctrl+O"
+    },
+    {
+      "name": "Boucle",
+      "keys": "L"
+    },
+    {
+      "name": "Aleatoire",
+      "keys": "R"
+    },
+    {
+      "name": "Sous-titres",
+      "keys": "V"
+    },
+    {
+      "name": "Piste audio",
+      "keys": "B"
+    },
+    {
+      "name": "Capture d'image",
+      "keys": "Shift+S"
+    }
+  ]
+}

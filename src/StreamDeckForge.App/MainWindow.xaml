@@ -101,6 +101,8 @@
                                   Content="Methode 2 - UI Automation (application demarree requise)" />
                         <CheckBox IsChecked="{Binding UseConfigFiles}"
                                   Content="Methode 3 - fichiers de configuration locaux" />
+                        <CheckBox IsChecked="{Binding UseCatalog}"
+                                  Content="Methode 4 - catalogue embarque (liste etablie a la main)" />
 
                         <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
                             <CheckBox IsChecked="{Binding ScanCompanionModules}"

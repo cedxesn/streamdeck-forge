@@ -10,7 +10,13 @@ public enum ExtractionMethod
     UiAutomation,
 
     /// <summary>Methode 3 : parseur dedie d'un fichier de configuration local.</summary>
-    ConfigFile
+    ConfigFile,
+
+    /// <summary>
+    /// Methode 4 : fiche du catalogue embarque. Liste etablie a la main, pour les
+    /// logiciels qui ne publient leurs raccourcis nulle part.
+    /// </summary>
+    Catalog
 }
 
 /// <summary>Un raccourci clavier extrait, avant placement sur la grille.</summary>

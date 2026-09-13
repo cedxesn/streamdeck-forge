@@ -38,6 +38,7 @@ public sealed class ShortcutRowViewModel : ObservableObject
         ExtractionMethod.AcceleratorTable => "Accelerateurs",
         ExtractionMethod.UiAutomation => "UI Automation",
         ExtractionMethod.ConfigFile => "Configuration",
+        ExtractionMethod.Catalog => "Catalogue",
         _ => Definition.Method.ToString()
     };
 

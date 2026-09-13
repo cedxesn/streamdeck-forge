@@ -168,9 +168,46 @@ d'après le générateur officiel, **pas prélevé sur une installation Mixbus r
 raccourci manque à l'appel sur le poste de votre utilisateur, le plus simple est de
 récupérer son fichier `.keys` : le parseur s'ajuste en quelques lignes.
 
-Les trois méthodes tournent indépendamment : l'échec de l'une n'empêche pas les autres, et
-leurs résultats sont fusionnés en dédupliquant par combinaison de touches, le libellé le
-plus parlant l'emportant.
+### Méthode 4 — catalogue embarqué
+
+Les trois premières méthodes sont des extractions : elles lisent ce que le logiciel publie.
+Beaucoup d'applications ne publient rien. Excel fermé, par exemple, ne donne strictement
+aucun raccourci : pas de table d'accélérateurs, pas de fichier de bindings, et UI
+Automation n'a aucune fenêtre à lire.
+
+`CatalogExtractor` est le dernier recours : une liste établie à la main, embarquée dans
+l'exécutable, indexée par nom d'exécutable. Excel fermé donne alors 30 raccourcis.
+
+| Fiche | Contenu |
+| --- | --- |
+| Excel, Word, PowerPoint, Outlook | 91 raccourcis, en **français** |
+| Explorateur et Windows | 16 raccourcis système |
+| Chrome, Edge, Firefox | 18 raccourcis chacun |
+| VLC | 12 raccourcis |
+
+Les fiches Office sont en français parce qu'Office francise réellement ses raccourcis :
+**Gras est `Ctrl+G`, pas `Ctrl+B`**. Le champ `culture` d'une fiche permet d'en fournir
+plusieurs versions ; la langue de Windows départage.
+
+C'est une liste **datée et faillible** : un raccourci peut changer d'une version à l'autre.
+Elle est donc modifiable sans recompiler — déposez un `.json` dans
+`%APPDATA%\StreamDeckForge\catalogue` :
+
+```json
+{
+  "product": "Mon logiciel",
+  "executables": ["monlogiciel.exe"],
+  "shortcuts": [
+    { "name": "Enregistrer", "keys": "Ctrl+S" },
+    { "name": "Rechercher",  "keys": "Ctrl+F" }
+  ]
+}
+```
+
+Les quatre méthodes tournent indépendamment : l'échec de l'une n'empêche pas les autres, et
+leurs résultats sont fusionnés en dédupliquant par combinaison de touches. En cas de
+doublon, c'est le libellé d'UI Automation qui l'emporte — il correspond exactement à ce
+que l'utilisateur voit à l'écran, dans la langue de son installation.
 
 ## Visuels des touches
 
@@ -200,14 +237,15 @@ Aucune méthode ne marche partout, mais elles se complètent. En pratique :
 | Type d'application | Ce qui fonctionne |
 | --- | --- |
 | Win32 / MFC classiques (regedit, mmc, vieux logiciels métier) | Méthode 1, sans ouvrir le logiciel |
-| Office, WinForms, WPF, WinUI (Excel, Paint, Explorateur) | Méthode 2, logiciel ouvert |
+| WinForms, WPF, WinUI, rubans Office (Excel, Paint, Explorateur) | Méthode 2, logiciel ouvert |
 | Éditeurs et DAW à fichiers de bindings (Mixbus, Ardour, VS Code, JetBrains…) | Méthode 3, liste complète et fiable |
-| Electron et Qt sans fichier de bindings (Discord, Slack, Spotify…) | Méthode 2 seulement, et souvent maigre |
+| Office, navigateurs, VLC, Windows | Méthode 4, sans ouvrir le logiciel |
+| Electron et Qt non catalogués (Discord, Slack, Spotify…) | Méthode 2 seulement, et souvent maigre |
 
-Le dernier cas est le seul angle mort réel : ces applications gardent leurs raccourcis en
-dur dans leur code JavaScript ou C++, sans jamais les publier ni à Windows, ni sur le
-disque. Pour celles-là, il n'existe pas de méthode d'extraction, seulement une saisie
-manuelle ou une liste préétablie.
+Le dernier cas est le seul angle mort qui reste : ces applications gardent leurs raccourcis
+en dur dans leur code, sans jamais les publier ni à Windows, ni sur le disque. Il n'existe
+pas de méthode d'extraction pour elles — seulement une fiche de catalogue à écrire, ce qui
+prend cinq minutes et se fait sans recompiler.
 
 ## Critères d'acceptation
 

@@ -52,13 +52,13 @@ internal static class Program
             Commandes :
               scan [--query <texte>]              Liste les applications installees.
               extract --app <nom|chemin.exe>      Extrait les raccourcis d'une application.
-                      [--methods accel,uia,config]
+                      [--methods accel,uia,config,catalog]
                       [--deep]                    Etend la lecture aux DLL voisines.
               export --app <nom|chemin.exe>       Produit un fichier .streamDeckProfile.
                      --out <fichier>
                      [--device mini|standard|mk2|xl]
                      [--name <nom du profil>]
-                     [--methods accel,uia,config]
+                     [--methods accel,uia,config,catalog]
                      [--icons]                    Genere les visuels des touches.
               verify <fichier.streamDeckProfile>  Controle la validite d'un profil.
               selftest                            Produit et relit un profil de test.
@@ -278,6 +278,9 @@ internal static class Program
                     break;
                 case "config" or "files":
                     methods.Add(ExtractionMethod.ConfigFile);
+                    break;
+                case "catalog" or "catalogue":
+                    methods.Add(ExtractionMethod.Catalog);
                     break;
             }
         }

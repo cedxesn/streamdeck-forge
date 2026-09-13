@@ -1,0 +1,74 @@
+{
+  "product": "Explorateur de fichiers et Windows",
+  "executables": [
+    "Explorer.EXE",
+    "explorer.exe"
+  ],
+  "note": "Raccourcis systeme : ils fonctionnent depuis n'importe quelle application.",
+  "shortcuts": [
+    {
+      "name": "Explorateur de fichiers",
+      "keys": "Win+E"
+    },
+    {
+      "name": "Bureau",
+      "keys": "Win+D"
+    },
+    {
+      "name": "Verrouiller la session",
+      "keys": "Win+L"
+    },
+    {
+      "name": "Parametres",
+      "keys": "Win+I"
+    },
+    {
+      "name": "Capture d'ecran",
+      "keys": "Win+Shift+S"
+    },
+    {
+      "name": "Presse-papiers",
+      "keys": "Win+V"
+    },
+    {
+      "name": "Projeter l'ecran",
+      "keys": "Win+P"
+    },
+    {
+      "name": "Gestionnaire des taches",
+      "keys": "Ctrl+Shift+Escape"
+    },
+    {
+      "name": "Vue des taches",
+      "keys": "Win+Tab"
+    },
+    {
+      "name": "Executer",
+      "keys": "Win+R"
+    },
+    {
+      "name": "Nouveau dossier",
+      "keys": "Ctrl+Shift+N"
+    },
+    {
+      "name": "Renommer",
+      "keys": "F2"
+    },
+    {
+      "name": "Proprietes",
+      "keys": "Alt+Enter"
+    },
+    {
+      "name": "Actualiser",
+      "keys": "F5"
+    },
+    {
+      "name": "Dossier parent",
+      "keys": "Alt+Up"
+    },
+    {
+      "name": "Supprimer definitivement",
+      "keys": "Shift+Delete"
+    }
+  ]
+}

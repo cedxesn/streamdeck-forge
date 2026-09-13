@@ -122,6 +122,42 @@ public static class KeyImageRenderer
         new("Son", "\uE767", Color.FromRgb(0xE0, 0xA8, 0x4C),
             ["volume", "gain", "fader", "level"]),
 
+        new("Fermer", "\uE8BB", Color.FromRgb(0xD8, 0x6A, 0x6A),
+            ["fermer", "close", "quitter", "quit", "exit"]),
+
+        new("Feuille", "\uE7C3", Color.FromRgb(0x4C, 0x9A, 0xE0),
+            ["feuille", "sheet", "classeur", "workbook", "onglet", "tab", "document", "diapositive", "slide", "page", "presentation"]),
+
+        new("Lien", "\uE71B", Color.FromRgb(0x3F, 0xB9, 0xB9),
+            ["lien", "link", "hypertexte", "hyperlink", "url"]),
+
+        new("Filtre", "\uE71C", Color.FromRgb(0xE0, 0xA8, 0x4C),
+            ["filtre", "filtrer", "filter", "tri", "trier", "sort"]),
+
+        new("Modifier", "\uE70F", Color.FromRgb(0xA9, 0x7C, 0xE8),
+            ["modifier", "edit", "editer", "renommer", "rename", "saisie"]),
+
+        new("Calcul", "\uE8EF", Color.FromRgb(0x3F, 0xB9, 0xB9),
+            ["calculer", "calcul", "calculate", "somme", "formule", "formula"]),
+
+        new("Debut", "\uE80F", Color.FromRgb(0x8A, 0x93, 0xA6),
+            ["debut", "home", "accueil", "fin", "end", "atteindre", "goto"]),
+
+        new("Police", "\uE8D2", Color.FromRgb(0xE8, 0x7C, 0xB0),
+            ["police", "font", "caractere", "taille"]),
+
+        new("Orthographe", "\uE8C1", Color.FromRgb(0x4C, 0xC3, 0x8A),
+            ["orthographe", "spelling", "grammaire", "dictionnaire", "langue"]),
+
+        new("Plein ecran", "\uE740", Color.FromRgb(0x8A, 0x93, 0xA6),
+            ["plein", "fullscreen", "ecran", "screen", "maximiser", "diaporama"]),
+
+        new("Message", "\uE715", Color.FromRgb(0x4C, 0x9A, 0xE0),
+            ["message", "mail", "courrier", "envoyer", "send", "repondre", "reply", "transferer", "forward"]),
+
+        new("Agenda", "\uE787", Color.FromRgb(0xE0, 0xA8, 0x4C),
+            ["calendrier", "calendar", "rendez", "reunion", "meeting", "tache", "task", "contact"]),
+
         new("Fenetre", "\uE737", Color.FromRgb(0x8A, 0x93, 0xA6),
             ["window", "fenetre", "mixer", "editor", "panel", "view", "affichage", "toggle"]),
 
@@ -200,6 +236,30 @@ public static class KeyImageRenderer
         return stream.ToArray();
     }
 
+    /// <summary>
+    /// Pictogrammes reellement presents dans la police installee. Les jeux d'icones de
+    /// Windows varient d'une version a l'autre : un point de code absent s'afficherait
+    /// en rectangle vide, ce qui est pire que le pictogramme generique.
+    /// </summary>
+    private static readonly Lazy<GlyphTypeface?> ResolvedIconFont = new(() =>
+    {
+        var typeface = new Typeface(
+            IconFont, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
+
+        return typeface.TryGetGlyphTypeface(out var glyphTypeface) ? glyphTypeface : null;
+    });
+
+    private static bool IsGlyphAvailable(string glyph)
+    {
+        if (string.IsNullOrEmpty(glyph))
+            return false;
+
+        var font = ResolvedIconFont.Value;
+
+        // Police introuvable : on laisse passer, le rendu fera au mieux.
+        return font is null || font.CharacterToGlyphMap.ContainsKey(glyph[0]);
+    }
+
     private static void Draw(DrawingContext context, string title, string keys, KeyCategory category)
     {
         var accent = new SolidColorBrush(category.Accent);
@@ -219,7 +279,8 @@ public static class KeyImageRenderer
         wash.Freeze();
         context.DrawRectangle(wash, null, new Rect(0, 0, ImageSize, ImageSize));
 
-        DrawCentered(context, category.Glyph, IconFont, 44, accent, 20);
+        var glyph = IsGlyphAvailable(category.Glyph) ? category.Glyph : Fallback.Glyph;
+        DrawCentered(context, glyph, IconFont, 44, accent, 20);
         DrawWrapped(context, title, 15, Brushes.White, 74, maxLines: 2);
         DrawCentered(context, keys, TextFont, 12, accent, ImageSize - 26);
 

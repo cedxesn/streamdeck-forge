@@ -36,10 +36,12 @@ UTILISATION
 1. La liste des logiciels installes apparait a gauche, deja remplie.
    Cliquer sur celui dont on veut les raccourcis.
 
-2. Cliquer sur "Extraire les raccourcis". Trois methodes sont lancees :
+2. Cliquer sur "Extraire les raccourcis". Quatre methodes sont lancees :
    - la lecture du programme lui-meme ;
    - la lecture des menus de sa fenetre, si le logiciel est ouvert ;
-   - la lecture de ses fichiers de configuration.
+   - la lecture de ses fichiers de configuration ;
+   - le catalogue embarque, une liste toute prete pour les logiciels courants
+     (Excel, Word, PowerPoint, Outlook, Chrome, Edge, Firefox, VLC, Windows).
 
    Astuce : ouvrir le logiciel cible AVANT d'extraire donne de meilleurs
    resultats, la deuxieme methode a alors quelque chose a lire.
@@ -91,6 +93,20 @@ SI RIEN N'EST TROUVE
 Certains logiciels ne publient leurs raccourcis nulle part : les applications
 recentes construites avec Electron ou Qt, notamment. Dans ce cas, ouvrir le
 logiciel, cocher "Deplier les menus" et relancer l'extraction.
+
+Si cela ne donne toujours rien, il reste le catalogue : creer un fichier .json
+dans le dossier
+  %APPDATA%\StreamDeckForge\catalogue
+sur ce modele, puis relancer l'extraction.
+
+  {
+    "product": "Mon logiciel",
+    "executables": ["monlogiciel.exe"],
+    "shortcuts": [
+      { "name": "Enregistrer", "keys": "Ctrl+S" },
+      { "name": "Rechercher",  "keys": "Ctrl+F" }
+    ]
+  }
 
 Les touches nommees "Commande 768" sont des raccourcis reels dont le nom n'a
 pas pu etre retrouve : il suffit de les renommer dans la liste du milieu avant

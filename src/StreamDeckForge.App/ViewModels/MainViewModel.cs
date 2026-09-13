@@ -29,6 +29,7 @@ public sealed class MainViewModel : ObservableObject
     private bool _useAcceleratorTables = true;
     private bool _useUiAutomation = true;
     private bool _useConfigFiles = true;
+    private bool _useCatalog = true;
     private bool _scanCompanionModules;
     private bool _expandMenus = true;
     private bool _generateIcons = true;
@@ -166,6 +167,16 @@ public sealed class MainViewModel : ObservableObject
         set => SetProperty(ref _useConfigFiles, value);
     }
 
+    /// <summary>
+    /// Liste etablie a la main, pour les logiciels qui ne publient leurs raccourcis
+    /// nulle part. C'est le seul recours quand les trois extractions echouent.
+    /// </summary>
+    public bool UseCatalog
+    {
+        get => _useCatalog;
+        set => SetProperty(ref _useCatalog, value);
+    }
+
     public bool ScanCompanionModules
     {
         get => _scanCompanionModules;
@@ -261,6 +272,7 @@ public sealed class MainViewModel : ObservableObject
         if (UseAcceleratorTables) methods.Add(ExtractionMethod.AcceleratorTable);
         if (UseUiAutomation) methods.Add(ExtractionMethod.UiAutomation);
         if (UseConfigFiles) methods.Add(ExtractionMethod.ConfigFile);
+        if (UseCatalog) methods.Add(ExtractionMethod.Catalog);
 
         if (methods.Count == 0)
         {
@@ -310,6 +322,7 @@ public sealed class MainViewModel : ObservableObject
         ExtractionMethod.AcceleratorTable => "Tables d'accelerateurs",
         ExtractionMethod.UiAutomation => "UI Automation",
         ExtractionMethod.ConfigFile => "Fichiers de configuration",
+        ExtractionMethod.Catalog => "Catalogue embarque",
         _ => method.ToString()
     };
 

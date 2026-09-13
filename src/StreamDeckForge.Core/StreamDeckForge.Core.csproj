@@ -17,4 +17,14 @@
     <Using Include="System.IO" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Fiches du catalogue embarque : elles doivent voyager dans l'assembly, la
+         publication en fichier unique ne laissant aucun dossier a cote de l'exe.
+         WithCulture=false est indispensable : sans lui, MSBuild prend un nom comme
+         "excel.fr.json" pour une ressource localisee et la deporte dans un assembly
+         satellite, ou le chargeur ne la trouve plus. Les fiches sont donc nommees
+         "excel-fr.json", et la langue est declaree dans le JSON lui-meme. -->
+    <EmbeddedResource Include="Catalog\*.json" WithCulture="false" />
+  </ItemGroup>
+
 </Project>

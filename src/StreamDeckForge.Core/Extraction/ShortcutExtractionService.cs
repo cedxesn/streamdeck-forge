@@ -23,7 +23,8 @@ public sealed class ShortcutExtractionService
         : this(
             new AcceleratorTableExtractor(),
             new UiAutomationExtractor(),
-            new ConfigFileExtractor())
+            new ConfigFileExtractor(),
+            new CatalogExtractor())
     {
     }
 
@@ -71,12 +72,21 @@ public sealed class ShortcutExtractionService
             .OrderBy(shortcut => shortcut.Name, StringComparer.CurrentCultureIgnoreCase)
             .ToList();
 
-    /// <summary>Un libelle reel vaut mieux qu'un identifiant de commande brut.</summary>
+    /// <summary>
+    /// Un libelle reel vaut mieux qu'un identifiant de commande brut. En cas d'egalite,
+    /// UI Automation l'emporte : ses libelles sont exactement ceux que l'utilisateur voit
+    /// a l'ecran, dans la langue de son installation.
+    /// </summary>
     private static int NameQuality(ShortcutDefinition shortcut)
     {
         if (shortcut.Name.StartsWith("Commande ", StringComparison.Ordinal))
             return 0;
 
-        return shortcut.Method == ExtractionMethod.UiAutomation ? 2 : 1;
+        return shortcut.Method switch
+        {
+            ExtractionMethod.UiAutomation => 3,
+            ExtractionMethod.Catalog => 2,
+            _ => 1
+        };
     }
 }

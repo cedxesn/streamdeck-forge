@@ -1,0 +1,80 @@
+{
+  "product": "Google Chrome",
+  "executables": [
+    "chrome.exe"
+  ],
+  "shortcuts": [
+    {
+      "name": "Nouvel onglet",
+      "keys": "Ctrl+T"
+    },
+    {
+      "name": "Fermer l'onglet",
+      "keys": "Ctrl+W"
+    },
+    {
+      "name": "Rouvrir l'onglet ferme",
+      "keys": "Ctrl+Shift+T"
+    },
+    {
+      "name": "Nouvelle fenetre",
+      "keys": "Ctrl+N"
+    },
+    {
+      "name": "Barre d'adresse",
+      "keys": "Ctrl+L"
+    },
+    {
+      "name": "Actualiser",
+      "keys": "F5"
+    },
+    {
+      "name": "Actualiser sans cache",
+      "keys": "Ctrl+Shift+R"
+    },
+    {
+      "name": "Rechercher dans la page",
+      "keys": "Ctrl+F"
+    },
+    {
+      "name": "Outils de developpement",
+      "keys": "F12"
+    },
+    {
+      "name": "Ajouter aux favoris",
+      "keys": "Ctrl+D"
+    },
+    {
+      "name": "Historique",
+      "keys": "Ctrl+H"
+    },
+    {
+      "name": "Telechargements",
+      "keys": "Ctrl+J"
+    },
+    {
+      "name": "Onglet suivant",
+      "keys": "Ctrl+Tab"
+    },
+    {
+      "name": "Zoom avant",
+      "keys": "Ctrl+OemPlus"
+    },
+    {
+      "name": "Zoom arriere",
+      "keys": "Ctrl+OemMinus"
+    },
+    {
+      "name": "Plein ecran",
+      "keys": "F11"
+    },
+    {
+      "name": "Imprimer",
+      "keys": "Ctrl+P"
+    },
+    {
+      "name": "Navigation privee",
+      "keys": "Ctrl+Shift+N"
+    }
+  ]
+}

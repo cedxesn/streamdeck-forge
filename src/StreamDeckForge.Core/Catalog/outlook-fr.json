@@ -1,0 +1,81 @@
+{
+  "product": "Microsoft Outlook (francais)",
+  "executables": [
+    "OUTLOOK.EXE"
+  ],
+  "culture": "fr",
+  "shortcuts": [
+    {
+      "name": "Nouveau message",
+      "keys": "Ctrl+Shift+M"
+    },
+    {
+      "name": "Envoyer",
+      "keys": "Ctrl+Enter"
+    },
+    {
+      "name": "Repondre",
+      "keys": "Ctrl+R"
+    },
+    {
+      "name": "Repondre a tous",
+      "keys": "Ctrl+Shift+R"
+    },
+    {
+      "name": "Transferer",
+      "keys": "Ctrl+F"
+    },
+    {
+      "name": "Envoyer et recevoir",
+      "keys": "F9"
+    },
+    {
+      "name": "Supprimer",
+      "keys": "Delete"
+    },
+    {
+      "name": "Marquer comme lu",
+      "keys": "Ctrl+Q"
+    },
+    {
+      "name": "Marquer comme non lu",
+      "keys": "Ctrl+U"
+    },
+    {
+      "name": "Nouveau rendez-vous",
+      "keys": "Ctrl+Shift+A"
+    },
+    {
+      "name": "Nouvelle tache",
+      "keys": "Ctrl+Shift+K"
+    },
+    {
+      "name": "Nouveau contact",
+      "keys": "Ctrl+Shift+C"
+    },
+    {
+      "name": "Courrier",
+      "keys": "Ctrl+1"
+    },
+    {
+      "name": "Calendrier",
+      "keys": "Ctrl+2"
+    },
+    {
+      "name": "Contacts",
+      "keys": "Ctrl+3"
+    },
+    {
+      "name": "Taches",
+      "keys": "Ctrl+4"
+    },
+    {
+      "name": "Rechercher",
+      "keys": "Ctrl+E"
+    },
+    {
+      "name": "Orthographe",
+      "keys": "F7"
+    }
+  ]
+}

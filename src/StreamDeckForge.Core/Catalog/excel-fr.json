@@ -1,0 +1,130 @@
+{
+  "product": "Microsoft Excel (francais)",
+  "executables": [
+    "EXCEL.EXE"
+  ],
+  "culture": "fr",
+  "note": "Office francise ses raccourcis de mise en forme : Gras est Ctrl+G et non Ctrl+B.",
+  "shortcuts": [
+    {
+      "name": "Nouveau classeur",
+      "keys": "Ctrl+N"
+    },
+    {
+      "name": "Ouvrir",
+      "keys": "Ctrl+O"
+    },
+    {
+      "name": "Enregistrer",
+      "keys": "Ctrl+S"
+    },
+    {
+      "name": "Enregistrer sous",
+      "keys": "F12"
+    },
+    {
+      "name": "Imprimer",
+      "keys": "Ctrl+P"
+    },
+    {
+      "name": "Fermer le classeur",
+      "keys": "Ctrl+W"
+    },
+    {
+      "name": "Couper",
+      "keys": "Ctrl+X"
+    },
+    {
+      "name": "Copier",
+      "keys": "Ctrl+C"
+    },
+    {
+      "name": "Coller",
+      "keys": "Ctrl+V"
+    },
+    {
+      "name": "Annuler",
+      "keys": "Ctrl+Z"
+    },
+    {
+      "name": "Repeter",
+      "keys": "Ctrl+Y"
+    },
+    {
+      "name": "Rechercher",
+      "keys": "Ctrl+F"
+    },
+    {
+      "name": "Remplacer",
+      "keys": "Ctrl+H"
+    },
+    {
+      "name": "Selectionner tout",
+      "keys": "Ctrl+A"
+    },
+    {
+      "name": "Gras",
+      "keys": "Ctrl+G"
+    },
+    {
+      "name": "Italique",
+      "keys": "Ctrl+I"
+    },
+    {
+      "name": "Souligne",
+      "keys": "Ctrl+U"
+    },
+    {
+      "name": "Format de cellule",
+      "keys": "Ctrl+1"
+    },
+    {
+      "name": "Lien hypertexte",
+      "keys": "Ctrl+K"
+    },
+    {
+      "name": "Modifier la cellule",
+      "keys": "F2"
+    },
+    {
+      "name": "Atteindre",
+      "keys": "F5"
+    },
+    {
+      "name": "Orthographe",
+      "keys": "F7"
+    },
+    {
+      "name": "Calculer",
+      "keys": "F9"
+    },
+    {
+      "name": "Nouvelle feuille",
+      "keys": "Shift+F11"
+    },
+    {
+      "name": "Feuille suivante",
+      "keys": "Ctrl+PageDown"
+    },
+    {
+      "name": "Feuille precedente",
+      "keys": "Ctrl+PageUp"
+    },
+    {
+      "name": "Debut de feuille",
+      "keys": "Ctrl+Home"
+    },
+    {
+      "name": "Fin de feuille",
+      "keys": "Ctrl+End"
+    },
+    {
+      "name": "Filtrer",
+      "keys": "Ctrl+Shift+L"
+    },
+    {
+      "name": "Police",
+      "keys": "Ctrl+Shift+F"
+    }
+  ]
+}
