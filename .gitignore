@@ -1,0 +1,17 @@
+# Sorties de compilation
+bin/
+obj/
+
+# Sorties de publication (les binaires sont distribues via les Releases GitHub)
+publish/
+publish-leger/
+*.zip
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+*.suo
+
+# Divers
+*.log

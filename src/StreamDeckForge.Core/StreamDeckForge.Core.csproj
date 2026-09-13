@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <!-- UseWPF donne acces a System.Drawing/Imaging (icones) et aux assemblies
+         UIAutomationClient / UIAutomationTypes livrees avec Microsoft.WindowsDesktop.App. -->
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Le SDK WindowsDesktop n'inclut pas System.IO dans ses usings implicites. -->
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+</Project>
