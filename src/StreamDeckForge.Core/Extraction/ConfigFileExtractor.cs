@@ -13,6 +13,7 @@ public sealed class ConfigFileExtractor : IShortcutExtractor
 
     public ConfigFileExtractor()
         : this(
+            new ArdourBindingsParser(),
             new VsCodeKeybindingParser(),
             new JetBrainsKeymapParser(),
             new SublimeKeymapParser(),

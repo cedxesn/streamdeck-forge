@@ -121,6 +121,7 @@ par produit :
 
 | Produit | Fichier |
 | --- | --- |
+| **Harrison Mixbus 12 / 32C, Ardour** | `*.keys` et `*.bindings`, dans le dossier d'installation **et** dans `%LOCALAPPDATA%\Mixbus*` |
 | VS Code, Insiders, VSCodium, Cursor, Windsurf | `%APPDATA%\<produit>\User\keybindings.json` |
 | IDE JetBrains | `%APPDATA%\JetBrains\<produit>\keymaps\*.xml` |
 | Sublime Text / Merge | `%APPDATA%\Sublime*\Packages\User\*.sublime-keymap` |
@@ -129,9 +130,55 @@ par produit :
 Ajouter un produit revient à implémenter `IKeybindingFileParser` et à l'ajouter à la liste
 du constructeur de `ConfigFileExtractor`.
 
+#### Cas particulier : Mixbus et Ardour
+
+Mixbus est dérivé d'Ardour, et ces logiciels sont une exception heureuse : ils écrivent
+**l'intégralité** de leurs raccourcis dans des fichiers XML, y compris les valeurs par
+défaut livrées avec le produit. Ailleurs, seules les personnalisations de l'utilisateur
+sont sur le disque. Le parseur lit donc la liste complète, sans que le logiciel ait besoin
+d'être ouvert.
+
+Le format est celui produit par `tools/fmt-bindings` en amont d'Ardour :
+
+```xml
+<BindingSet name="Mixbus">
+ <Bindings name="Global">
+  <Press>
+   <Binding key="Control-s" action="Common/Save" group="File"/>
+```
+
+`ArdourBindingsParser` traduit les modificateurs logiques d'Ardour (`Primary` = Ctrl,
+`Secondary` = Alt, `Tertiary` = Maj, `Level4` = Windows), accepte aussi bien
+`Primary-a` que la variante accélérateur GTK `<Primary>a`, et convertit les noms de touches
+GDK (`space`, `KP_Enter`, `bracketleft`) vers les codes attendus par Elgato. Les noms qui
+désignent un caractère obtenu touche Maj enfoncée — `question`, `braceleft`, `plus`… —
+reçoivent automatiquement le modificateur Maj, sans quoi le boîtier enverrait la mauvaise
+frappe.
+
+Vérifié sur un jeu de 20 bindings couvrant tous ces cas ; le fichier de test a été écrit
+d'après le générateur officiel, **pas prélevé sur une installation Mixbus réelle**. Si un
+raccourci manque à l'appel sur le poste de votre utilisateur, le plus simple est de
+récupérer son fichier `.keys` : le parseur s'ajuste en quelques lignes.
+
 Les trois méthodes tournent indépendamment : l'échec de l'une n'empêche pas les autres, et
 leurs résultats sont fusionnés en dédupliquant par combinaison de touches, le libellé le
 plus parlant l'emportant.
+
+### Quelle couverture attendre ?
+
+Aucune méthode ne marche partout, mais elles se complètent. En pratique :
+
+| Type d'application | Ce qui fonctionne |
+| --- | --- |
+| Win32 / MFC classiques (regedit, mmc, vieux logiciels métier) | Méthode 1, sans ouvrir le logiciel |
+| Office, WinForms, WPF, WinUI (Excel, Paint, Explorateur) | Méthode 2, logiciel ouvert |
+| Éditeurs et DAW à fichiers de bindings (Mixbus, Ardour, VS Code, JetBrains…) | Méthode 3, liste complète et fiable |
+| Electron et Qt sans fichier de bindings (Discord, Slack, Spotify…) | Méthode 2 seulement, et souvent maigre |
+
+Le dernier cas est le seul angle mort réel : ces applications gardent leurs raccourcis en
+dur dans leur code JavaScript ou C++, sans jamais les publier ni à Windows, ni sur le
+disque. Pour celles-là, il n'existe pas de méthode d'extraction, seulement une saisie
+manuelle ou une liste préétablie.
 
 ## Critères d'acceptation
 
@@ -140,7 +187,7 @@ Mesures faites sur le poste de développement (Windows 11 Pro 26200, .NET SDK 8.
 | Critère | État |
 | --- | --- |
 | Lister les logiciels en moins de trois secondes | **Vérifié.** 98 applications détectées en 103 à 161 ms sur trois exécutions consécutives de `sdforge scan`. Registre et menu Démarrer sont scannés en parallèle, les `.lnk` lus par un parseur binaire plutôt que par COM, les icônes et les chemins manquants résolus paresseusement. |
-| Obtenir les combinaisons par au moins une méthode | **Vérifié pour les trois méthodes.** Méthode 1 : 20 raccourcis sur `regedit.exe`, 15 sur `mmc.exe`, 10 sur `notepad.exe`. Méthode 2 : 3 raccourcis sur Paint, 8 sur Excel en lecture passive (3,5 s). Méthode 3 : 4 raccourcis sur un `shortcuts.xml` Notepad++. |
+| Obtenir les combinaisons par au moins une méthode | **Vérifié pour les trois méthodes.** Méthode 1 : 20 raccourcis sur `regedit.exe`, 15 sur `mmc.exe`, 10 sur `notepad.exe`. Méthode 2 : 3 raccourcis sur Paint, 8 sur Excel en lecture passive (3,5 s). Méthode 3 : 20 raccourcis sur un fichier de bindings Mixbus, 4 sur un `shortcuts.xml` Notepad++. |
 | Fichier `.streamDeckProfile` valide et importable | **Partiellement vérifié.** `sdforge selftest` produit et relit un profil valide pour les quatre modèles ; un export réel depuis `regedit.exe` donne 20 actions dans une archive conforme (`exemples/`). En revanche **l'import dans le logiciel Elgato n'a pas pu être testé** : il n'est pas installé sur ce poste. |
 
 Le seul point non démontré est donc l'import final. Le manifeste suit le format décrit dans
