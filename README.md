@@ -130,6 +130,14 @@ par produit :
 Ajouter un produit revient à implémenter `IKeybindingFileParser` et à l'ajouter à la liste
 du constructeur de `ConfigFileExtractor`.
 
+Pour les logiciels qu'aucun parseur ne reconnaît par son nom, `BindingFileFinder` prend le
+relais : il ratisse le dossier d'installation et les dossiers de préférences dont le nom
+évoque l'application (`%APPDATA%`, `%LOCALAPPDATA%`, `~/.config`) à la recherche de fichiers
+`*.keys`, `*.bindings`, `*.keymap`, `keybindings.json`, `shortcuts.xml`… puis soumet chaque
+fichier trouvé à tous les parseurs. **C'est le contenu qui décide, pas le nom** : un
+`.keys` appartenant à un dérivé d'Ardour inconnu sera lu correctement sans qu'on ait eu à
+le déclarer.
+
 #### Cas particulier : Mixbus et Ardour
 
 Mixbus est dérivé d'Ardour, et ces logiciels sont une exception heureuse : ils écrivent
@@ -163,6 +171,27 @@ récupérer son fichier `.keys` : le parseur s'ajuste en quelques lignes.
 Les trois méthodes tournent indépendamment : l'échec de l'une n'empêche pas les autres, et
 leurs résultats sont fusionnés en dédupliquant par combinaison de touches, le libellé le
 plus parlant l'emportant.
+
+## Visuels des touches
+
+Chaque touche reçoit un PNG 144 × 144 généré à l'export : fond sombre, pictogramme,
+titre, combinaison, et un liseré de couleur. Le pictogramme et la couleur viennent de la
+**famille** de la commande, déduite de son libellé et de son identifiant — enregistrement,
+lecture, repères, fichier, édition, sélection, recherche, navigation, mise en forme, son,
+fenêtre, réglages, aide. Les commandes d'une même famille se ressemblent, ce qui rend la
+grille lisible d'un coup d'œil.
+
+Le rendu passe par WPF (`DrawingVisual` + `RenderTargetBitmap`) et par les polices d'icônes
+livrées avec Windows (*Segoe Fluent Icons*, repli sur *Segoe MDL2 Assets*) : aucune
+dépendance graphique supplémentaire, aucune image à embarquer.
+
+La reconnaissance se fait **mot à mot**, pas en sous-chaîne. C'est nécessaire : en simple
+sous-chaîne, `playhead` déclenchait la famille *Lecture* à cause de `play`, et `Loop`
+héritait du pictogramme de lecture parce que son identifiant contient `Transport`.
+
+L'option est activée par défaut dans l'interface, et disponible en ligne de commande via
+`--icons`. Décochée, les touches gardent l'icône par défaut de l'action Elgato avec le
+titre par-dessus.
 
 ### Quelle couverture attendre ?
 
@@ -218,6 +247,10 @@ permet de le tester en une manipulation.
   rapport pourrait être lue : un filtre de plausibilité l'écarte, au prix d'un libellé
   « Commande 768 » qu'il faut renommer à la main dans l'interface. C'est ce qui arrive sur
   Notepad, alors que regedit donne bien « Actualise la fenêtre » ou « Renomme la sélection ».
-- **Images de touches.** L'export ne pose que des titres ; les visuels sont laissés à
-  l'icône par défaut de l'action Elgato. La structure `Images/` est déjà écrite par
-  `StreamDeckProfileWriter` si l'on renseigne `KeyAssignment.ImagePng`.
+- **Images de touches.** Les PNG sont écrits à la racine du dossier `.sdProfile` et
+  référencés par le champ `Image` de chaque état. La disposition à plat est le choix le
+  plus sûr, mais **elle n'a pas pu être confrontée au logiciel Elgato** : si les visuels
+  n'apparaissaient pas à l'import, c'est le premier endroit où regarder.
+- **Classement des visuels par mots-clés.** La famille d'une commande est devinée d'après
+  son libellé. Un libellé inhabituel tombe sur le pictogramme générique — un clavier. Les
+  familles se complètent dans `KeyImageRenderer.Categories`, une ligne par famille.

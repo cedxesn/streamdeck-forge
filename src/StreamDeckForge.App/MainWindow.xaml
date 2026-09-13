@@ -193,6 +193,9 @@
                     </Grid>
 
                     <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                        <CheckBox IsChecked="{Binding GenerateIcons}"
+                                  Margin="0,0,0,6"
+                                  Content="Generer un visuel par touche (pictogramme et couleur)" />
                         <TextBlock Style="{StaticResource SubtleTextStyle}"
                                    TextWrapping="Wrap"
                                    Margin="0,0,0,8"

@@ -2,6 +2,7 @@ using StreamDeckForge.Core.Discovery;
 using StreamDeckForge.Core.Extraction;
 using StreamDeckForge.Core.Keys;
 using StreamDeckForge.Core.Models;
+using StreamDeckForge.Core.Rendering;
 using StreamDeckForge.Core.StreamDeck;
 
 namespace StreamDeckForge.Cli;
@@ -13,6 +14,7 @@ namespace StreamDeckForge.Cli;
 /// </summary>
 internal static class Program
 {
+    [STAThread]
     private static int Main(string[] args)
     {
         if (args.Length == 0)
@@ -57,6 +59,7 @@ internal static class Program
                      [--device mini|standard|mk2|xl]
                      [--name <nom du profil>]
                      [--methods accel,uia,config]
+                     [--icons]                    Genere les visuels des touches.
               verify <fichier.streamDeckProfile>  Controle la validite d'un profil.
               selftest                            Produit et relit un profil de test.
             """);
@@ -138,6 +141,9 @@ internal static class Program
         var layout = new ProfileLayout(device, profileName);
         var overflow = layout.AutoFill(aggregated.Shortcuts);
 
+        if (args.Contains("--icons"))
+            KeyImageRenderer.Apply(layout);
+
         var exported = StreamDeckProfileWriter.Write(layout, output);
         var (valid, message) = StreamDeckProfileWriter.Verify(exported.FilePath);
 
@@ -212,6 +218,9 @@ internal static class Program
         {
             var layout = new ProfileLayout(device, $"Selftest {device.DisplayName}");
             var overflow = layout.AutoFill(shortcuts);
+
+            // Le rendu des visuels fait partie de la chaine a valider.
+            KeyImageRenderer.Apply(layout);
 
             var path = Path.Combine(
                 Path.GetTempPath(),

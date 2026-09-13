@@ -10,9 +10,14 @@ Un fichier `.streamDeckProfile` est une archive Zip :
 MonProfil.streamDeckProfile
 └── 7C3F9B2E-....-....-....-............sdProfile/
     ├── manifest.json
-    └── Images/                  (optionnel)
-        └── key_0_0.png
+    ├── key_0_0.png              (optionnel)
+    ├── key_1_0.png
+    └── ...
 ```
+
+Les visuels sont posés à plat, à la racine du dossier `.sdProfile`, et référencés par le
+champ `Image` de chaque état. Un sous-dossier n'étant pas garanti d'être résolu par
+l'application Elgato, c'est la disposition la plus sûre.
 
 Le dossier racine porte un GUID en majuscules suivi de `.sdProfile`. Un GUID neuf est tiré
 à chaque export, afin que deux exports successifs n'écrasent pas le même profil à l'import.

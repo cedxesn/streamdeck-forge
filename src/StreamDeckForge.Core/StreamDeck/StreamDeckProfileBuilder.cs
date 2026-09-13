@@ -60,9 +60,13 @@ public static class StreamDeckProfileBuilder
         };
     }
 
-    /// <summary>Chemin relatif, dans le profil, de l'image d'une touche.</summary>
+    /// <summary>
+    /// Chemin de l'image d'une touche, relatif a la racine du dossier .sdProfile.
+    /// On reste a plat : c'est la disposition la plus sure, un sous-dossier n'etant pas
+    /// garanti d'etre resolu par l'application Elgato.
+    /// </summary>
     public static string ImagePathFor(KeyAssignment assignment) =>
-        $"Images/key_{assignment.Column}_{assignment.Row}.png";
+        $"key_{assignment.Column}_{assignment.Row}.png";
 
     public static HotkeyEntry ToHotkeyEntry(KeyChord chord)
     {

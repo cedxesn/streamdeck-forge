@@ -57,6 +57,22 @@ UTILISATION
    Double-cliquer ce fichier l'importe dans le logiciel Elgato Stream Deck.
 
 
+LES VISUELS DES TOUCHES
+-----------------------
+
+La case "Generer un visuel par touche" est cochee par defaut : chaque touche recoit
+une image avec un pictogramme et une couleur choisis d'apres la commande. Les
+commandes d'une meme famille se ressemblent - le vert pour la lecture, le bleu pour
+les fichiers, le violet pour l'edition, l'orange pour les reperes - ce qui rend le
+boitier lisible d'un coup d'oeil.
+
+Si un libelle inhabituel tombe sur le pictogramme generique (un clavier), il suffit
+de renommer la touche avec un mot plus courant avant d'exporter : "Enregistrer",
+"Lecture", "Copier"...
+
+Case decochee, les touches gardent l'icone par defaut d'Elgato avec le titre dessus.
+
+
 CAS PARTICULIER : MIXBUS ET ARDOUR
 ----------------------------------
 

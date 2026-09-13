@@ -6,6 +6,7 @@ using StreamDeckForge.App.Infrastructure;
 using StreamDeckForge.Core.Discovery;
 using StreamDeckForge.Core.Extraction;
 using StreamDeckForge.Core.Models;
+using StreamDeckForge.Core.Rendering;
 using StreamDeckForge.Core.StreamDeck;
 
 namespace StreamDeckForge.App.ViewModels;
@@ -30,6 +31,7 @@ public sealed class MainViewModel : ObservableObject
     private bool _useConfigFiles = true;
     private bool _scanCompanionModules;
     private bool _expandMenus = true;
+    private bool _generateIcons = true;
     private ProfileLayout _layout;
 
     public MainViewModel()
@@ -174,6 +176,16 @@ public sealed class MainViewModel : ObservableObject
     {
         get => _expandMenus;
         set => SetProperty(ref _expandMenus, value);
+    }
+
+    /// <summary>
+    /// Fabrique un visuel par touche : pictogramme et couleur deduits de la commande.
+    /// Sans cela, le boitier affiche le titre sur l'icone par defaut d'Elgato.
+    /// </summary>
+    public bool GenerateIcons
+    {
+        get => _generateIcons;
+        set => SetProperty(ref _generateIcons, value);
     }
 
     public string CapacityLabel =>
@@ -396,6 +408,10 @@ public sealed class MainViewModel : ObservableObject
         try
         {
             _layout.ProfileName = ProfileName;
+
+            if (GenerateIcons)
+                KeyImageRenderer.Apply(_layout);
+
             var result = StreamDeckProfileWriter.Write(_layout, dialog.FileName);
             var (valid, message) = StreamDeckProfileWriter.Verify(result.FilePath);
 
